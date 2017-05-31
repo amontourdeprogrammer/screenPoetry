@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('screenpoetry:server');
 var http = require('http');
+var SerialPort = require('serialport');
+require('dotenv').config()
 
 /**
  * Get port from environment and store in Express.
@@ -29,6 +31,8 @@ app.setIo(io);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+serialListener();
 
 /**
  * Normalize a port into a number, string, or false.
@@ -93,23 +97,18 @@ function onListening() {
 //serial listener
 function serialListener()
 {
-	var receivedData = "";
-	serialPort = new SerialPort('/dev/cu.usbmodemfa141', {
-	    baudrate: 9600,
-	    // defaults for Arduino serial communication
-	     dataBits: 8, 
-	     parity: 'none', 
-	     stopBits: 1, 
-	     flowControl: false 
-	});
+  var receivedData = "";
+  serialPort = new SerialPort(process.env.ARDUINOPORTNAME, {
+      baudrate: 9600,
+      // defaults for Arduino serial communication
+       dataBits: 8,
+       parity: 'none',
+       stopBits: 1,
+       flowControl: false
+  });
 
-	serialPort.on("open", function () {
-	  console.log('open serial communication');
-         // Listens to incoming data
-	    serialPort.on('data', function(data) { 
-	        receivedData += data.toString(); 
-         	// send the incoming data to browser with websockets.
-	   		socketServer.emit('userInput', receivedData);
-	   	});
-	});  
+  serialPort.on("open", function () {
+        console.log('open serial communication');
+      serialPort.write('hello Cecile');
+  });
 }
