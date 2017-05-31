@@ -1,10 +1,11 @@
 var SerialPort = require('serialport');
+require('dotenv').config()
 
 //serial listener
 function serialListener()
 {
 	var receivedData = "";
-	serialPort = new SerialPort('/dev/cu.usbmodemfa141', {
+	serialPort = new SerialPort(process.env.ARDUINOPORTNAME, {
 	    baudrate: 9600,
 	    // defaults for Arduino serial communication
 	     dataBits: 8, 
