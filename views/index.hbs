@@ -1,2 +1,9 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
+<form method="POST" action="/">
+	Pick a word...<br>
+	<input type="text" name="userInput"><br>
+	<button type="submit">Send</button>
+</form>
+
+<p>You sent {{userInput}}</p>
