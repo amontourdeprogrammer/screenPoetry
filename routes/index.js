@@ -8,8 +8,18 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Screen Poetry' });
 });
 
+var words = [];
+
 router.post('/', function (req, res) {
-	serialListener(req.body.userInput);
+	if(words.length < 4) {
+		words.push(req.body.userInput);
+	} else {
+		words = [req.body.userInput];
+	};
+
+	var sentence = words.join(" ");
+	serialListener(sentence);
+
 	res.render('index', { title: 'Screen Poetry', userInput: req.body.userInput });
 });
 

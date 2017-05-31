@@ -15,7 +15,7 @@ function serialListener(userInput)
   });
 
   serialPort.on("open", function () {
-        console.log('open serial communication');
+      console.log('open serial communication');
       serialPort.write(userInput);
       serialPort.close();
   });
