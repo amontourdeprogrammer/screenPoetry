@@ -11,14 +11,14 @@ router.get('/', function(req, res, next) {
 var words = [];
 
 router.post('/', function (req, res) {
-	if(words.length < 4) {
+	if(words.length < 3) {
 		words.push(req.body.userInput);
 	} else {
-		words = [req.body.userInput];
+		words.push(req.body.userInput);
+		var sentence = words.join(" ");
+		serialListener(sentence);
+		words = [];
 	};
-
-	var sentence = words.join(" ");
-	serialListener(sentence);
 
 	res.render('index', { title: 'Screen Poetry', userInput: req.body.userInput });
 });
