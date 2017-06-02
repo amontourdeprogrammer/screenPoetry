@@ -4,7 +4,7 @@
 
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-String input, firstLine, secondLine;
+String input;
 
 void setup() {
   // set up the LCD's number of columns and rows:
@@ -21,12 +21,16 @@ void loop() {
     lcd.clear();
     input = Serial.readString();
     lcd.print(input);
-    delay(600);
+    delay(1000);
     
-    for (int positionCounter = 0; positionCounter < input.length(); positionCounter++) {
+    for (int positionCounter = 0; positionCounter < input.length() - 16; positionCounter++) {
       lcd.scrollDisplayLeft();
-      delay(200);
+      delay(500);
     }
+
+    delay(600);
+    lcd.clear();
+
    }
  }
 
