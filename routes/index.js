@@ -11,8 +11,15 @@ router.get('/', function(req, res, next) {
 var words = [];
 
 router.post('/', function (req, res) {
-	if(words.length < 3) {
+	if (words.length < 3) {
 		words.push(req.body.userInput);
+		if (words.length == 1) {
+			serialListener("Gimme a verb");
+		} else if (words.length == 2){
+			serialListener("Gimme a complement");
+		} else if (words.length == 3){
+			serialListener("Gimme an adjective");
+		}
 	} else {
 		words.push(req.body.userInput);
 		var sentence = words.join(" ");
